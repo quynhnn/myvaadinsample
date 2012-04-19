@@ -15,6 +15,7 @@
  */
 package com.esoft;
 
+import com.esoft.common.Constants;
 import com.github.peholmst.i18n4vaadin.I18N;
 import com.github.peholmst.i18n4vaadin.ResourceBundleI18N;
 import com.vaadin.Application;

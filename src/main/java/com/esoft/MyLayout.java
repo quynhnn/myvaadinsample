@@ -2,10 +2,7 @@ package com.esoft;
 
 import java.util.Locale;
 
-import com.github.peholmst.i18n4vaadin.I18N;
-import com.github.peholmst.i18n4vaadin.I18NComponent;
-import com.github.peholmst.i18n4vaadin.I18NListener;
-import com.github.peholmst.i18n4vaadin.support.I18NComponentSupport;
+import com.esoft.common.I18NVerticalLayout;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -13,7 +10,6 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.TabSheet.Tab;
-import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.BaseTheme;
 
 /**
@@ -24,10 +20,9 @@ import com.vaadin.ui.themes.BaseTheme;
  *
  */
 
-public class MyLayout extends VerticalLayout implements I18NComponent, I18NListener {
+public class MyLayout extends I18NVerticalLayout {
 	private static final long serialVersionUID = 1545155799774362389L;
 
-	private final I18NComponentSupport support = new I18NComponentSupport(this);
 	private Label myLabel;
 
 	private Tab orderingTab;
@@ -36,39 +31,12 @@ public class MyLayout extends VerticalLayout implements I18NComponent, I18NListe
 	private OrderingLayout orderingLayout;
 	private BookingLayout bookingLayout;
 	
-	
-	public void setI18N(I18N i18n) {
-		support.setI18N(i18n);
-	}
-
-	public I18N getI18N() {
-		return support.getI18N();
-	}
-
 	public MyLayout() {
-		initComponents();
+		super();
     }
 	
-	@Override
-    public void attach() {
-        super.attach();
-        getI18N().addListener(this); // Register listener
-        updateLabels();
-    }
-
-    @Override
-    public void detach() {
-        // Remember to unregister listener as well!
-        getI18N().removeListener(this);
-        super.detach();
-    }
-
-    public void localeChanged(I18N sender, Locale oldLocale, Locale newLocale) {
-        updateLabels();
-    }   
-    
 	@SuppressWarnings("serial")
-	private void initComponents() {
+	public void initComponents() {
 		setMargin(true);
 		setSizeFull();
 
@@ -116,7 +84,7 @@ public class MyLayout extends VerticalLayout implements I18NComponent, I18NListe
 		addComponent(languageButtons);
 	}
 
-    private void updateLabels() {
+    public void updateLabels() {
         myLabel.setValue(getI18N().getMessage("Greeting"));
         
 		orderingTab.setCaption(getI18N().getMessage("orderingTab.label"));
